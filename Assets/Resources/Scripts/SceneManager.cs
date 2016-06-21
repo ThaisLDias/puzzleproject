@@ -1,16 +1,21 @@
 ﻿using System.Collections;
 using UnityEngine;
+using System.IO;
 
 public class SceneManager : MonoBehaviour {
 	
 	private int currentScene;
+	[SerializeField]
+	private GameObject plane;
+	private Texture snapshot;
+	private int can = 1;
 
 	// Color Game Variables
 	private int cg_count;
 	private int cg_limit;
 	private float cg_rand;
 	private GameObject cg_square;
-	
+
 	void Start () {
 		currentScene = Application.loadedLevel;
 		if (currentScene == 0) {} // "Menu"
@@ -31,7 +36,11 @@ public class SceneManager : MonoBehaviour {
 	}
 	
 	void Menu() {
-
+		if (can < 3) {
+			Debug.Log("PORRA");
+			StartCoroutine (TakeSnapshot (Screen.width, Screen.height));
+			can++;
+		}
 	}
 
 	void Lobby() {
@@ -81,10 +90,22 @@ public class SceneManager : MonoBehaviour {
 // Utils
 
 	public void ChangeScene (int level) {
-		Application.LoadLevel (level);
+		//Application.LoadLevel (level);
+
 	}
 	
 	public void ChangeScene (string level) {
 		Application.LoadLevel (level);
+	}
+
+	public IEnumerator TakeSnapshot(int width, int height) {
+		yield return new WaitForEndOfFrame();
+		Texture2D texture = new Texture2D (width, height, TextureFormat.RGB24, true);
+		texture.ReadPixels(new Rect(0, 0, width, height), 0, 0);
+		texture.Apply();
+		snapshot = texture;
+		plane.SetActive (true);
+		plane.GetComponent<Renderer>().material.mainTexture = snapshot;
+		plane.transform.localScale = new Vector3(19.5f, 1, 10);
 	}
 }
