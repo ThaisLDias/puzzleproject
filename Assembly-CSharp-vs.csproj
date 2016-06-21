@@ -5,7 +5,7 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{A87A5E39-B3E2-36BB-B997-E8CED692869F}</ProjectGuid>
+	<ProjectGuid>{DB285924-695D-82ED-98D6-5FBC9E48F74B}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
@@ -47,10 +47,27 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Resources\Scripts\Draggable.cs" />
-     <Compile Include="Assets\Resources\Scripts\MouseObjScript.cs" />
+     <Compile Include="Assets\Resources\Scripts\Randomizer.cs" />
      <Compile Include="Assets\Resources\Scripts\SceneManager.cs" />
+     <Compile Include="Assets\Resources\Scripts\Snap.cs" />
+     <None Include="Assets\DOTween\readme.txt" />
+     <None Include="Assets\DOTween\DOTween50.xml" />
+     <None Include="Assets\DOTween\DOTween46.xml" />
+     <None Include="Assets\DOTween\DOTween43.xml" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween">
+ <HintPath>C:/Users/nicole.freitas/Desktop/puzzleproject/Assets/DOTween/DOTween.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween43">
+ <HintPath>C:/Users/nicole.freitas/Desktop/puzzleproject/Assets/DOTween/DOTween43.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween46">
+ <HintPath>C:/Users/nicole.freitas/Desktop/puzzleproject/Assets/DOTween/DOTween46.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween50">
+ <HintPath>C:/Users/nicole.freitas/Desktop/puzzleproject/Assets/DOTween/DOTween50.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.iOS.Extensions.Xcode">
  <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/iossupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
