@@ -87,10 +87,10 @@ public class SceneManager : MonoBehaviour {
 	}
 
 
-// Utils
+	// Utils
 
 	public void ChangeScene (int level) {
-		//Application.LoadLevel (level);
+		Application.LoadLevel (level);
 
 	}
 	
