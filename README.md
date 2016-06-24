@@ -1,4 +1,4 @@
-# "Puzzle Project"
+# Pupper ("Puzzle Project")
 A project designed for aiding children with learning difficulties.
 
 <hr>
