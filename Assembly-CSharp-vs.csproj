@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Resources\Scripts\Draggable.cs" />
+     <Compile Include="Assets\Resources\Scripts\OtherSnap.cs" />
      <Compile Include="Assets\Resources\Scripts\Randomizer.cs" />
      <Compile Include="Assets\Resources\Scripts\SceneManager.cs" />
      <Compile Include="Assets\Resources\Scripts\Snap.cs" />

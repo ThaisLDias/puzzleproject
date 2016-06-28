@@ -10,6 +10,12 @@ public class SceneManager : MonoBehaviour {
 	private int cg_limit;
 	private float cg_rand;
 	private GameObject cg_square;
+
+	/*//Puzzle Game Variables
+	private GameObject worm;
+	private GameObject fish;
+	private GameObject bird;
+	private static bool next;*/
 	
 	void Start () {
 		currentScene = Application.loadedLevel;
@@ -18,7 +24,7 @@ public class SceneManager : MonoBehaviour {
 		if (currentScene == 2) {} // "Credits"
 		if (currentScene == 3) cg_init (); // "Color Game"
 		if (currentScene == 4) {} // "Word Game"
-		if (currentScene == 5) {} // "Puzzle Game"
+		if (currentScene == 5) {} //pg_init (); // "Puzzle Game"
 	}
 	
 	void Update() {
@@ -27,7 +33,7 @@ public class SceneManager : MonoBehaviour {
 		if (currentScene == 2) Credits ();
 		if (currentScene == 3) ColorGame ();
 		if (currentScene == 4) WordGame ();
-		if (currentScene == 5) PuzzleGame ();
+		if (currentScene == 5) /*next = OtherSnap.completed;*/ PuzzleGame ();
 	}
 	
 	void Menu() {
@@ -47,6 +53,12 @@ public class SceneManager : MonoBehaviour {
 		cg_limit = 7;
 		cg_square = Resources.Load("Prefabs/Object") as GameObject;
 	}
+	/*
+	void pg_init(){
+		fish = GameObject.Find("Fish");
+		worm = GameObject.Find("Worm");
+		bird = GameObject.Find("Bird");
+	}*/
 	
 	void ColorGame() {
 		if (cg_count >= cg_limit) {
@@ -74,7 +86,6 @@ public class SceneManager : MonoBehaviour {
 	}
 
 	void PuzzleGame() {
-		
 	}
 
 
