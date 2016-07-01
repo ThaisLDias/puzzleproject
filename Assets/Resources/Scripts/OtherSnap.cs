@@ -4,22 +4,17 @@ using System.Collections;
 public class OtherSnap : MonoBehaviour {
 		
 		private string cuteChildGameObjectName;
-		public static int count;
-		public static bool completed = false;
+
 		private GameObject worm;
 		private GameObject fish;
 		private GameObject bird;
+		public int hasHappened;
 		
 		void Awake () {
 			cuteChildGameObjectName = "";
-			count = 0;
-			completed = false;
 			fish = GameObject.Find("Fish");
 			worm = GameObject.Find("Worm");
 			bird = GameObject.Find("Bird");
-			fish.SetActive (false);
-			worm.SetActive (false);
-			bird.SetActive (true);
 		}
 		
 		void OnTriggerEnter2D (Collider2D col) {
@@ -33,7 +28,6 @@ public class OtherSnap : MonoBehaviour {
 			if (cuteChildGameObjectName == "" || cuteChildGameObjectName == col.gameObject.name) {
 				cuteChildGameObjectName = col.gameObject.name;
 				col.gameObject.transform.position = new Vector2 (this.transform.position.x, this.transform.position.y);
-				count++;
 			}
 		}
 		
@@ -42,11 +36,20 @@ public class OtherSnap : MonoBehaviour {
 		}
 
 		void Update(){
-		if (count == 2) {
-			completed = true;
+		hasHappened = SceneManager.pg_count;
+		if (hasHappened < 800) {
+			fish.SetActive (false);
+			worm.SetActive (false);
+			bird.SetActive (true);
 		}
-		if (completed) {
+
+		if (hasHappened > 800 && hasHappened < 1600) {
 			bird.SetActive(false);
+			worm.SetActive(true);
+		}
+
+		if (hasHappened > 1600) {
+			worm.SetActive(false);
 			fish.SetActive(true);
 		}
 	}

@@ -11,11 +11,11 @@ public class SceneManager : MonoBehaviour {
 	private float cg_rand;
 	private GameObject cg_square;
 
-	/*//Puzzle Game Variables
+	//Puzzle Game Variables
 	private GameObject worm;
 	private GameObject fish;
 	private GameObject bird;
-	private static bool next;*/
+	public static int pg_count;
 	
 	void Start () {
 		currentScene = Application.loadedLevel;
@@ -24,7 +24,10 @@ public class SceneManager : MonoBehaviour {
 		if (currentScene == 2) {} // "Credits"
 		if (currentScene == 3) cg_init (); // "Color Game"
 		if (currentScene == 4) {} // "Word Game"
-		if (currentScene == 5) {} //pg_init (); // "Puzzle Game"
+		if (currentScene == 5) {
+			fish = GameObject.Find("Fish");
+			worm = GameObject.Find("Worm");
+			bird = GameObject.Find("Bird");} // "Puzzle Game"
 	}
 	
 	void Update() {
@@ -33,7 +36,7 @@ public class SceneManager : MonoBehaviour {
 		if (currentScene == 2) Credits ();
 		if (currentScene == 3) ColorGame ();
 		if (currentScene == 4) WordGame ();
-		if (currentScene == 5) /*next = OtherSnap.completed;*/ PuzzleGame ();
+		if (currentScene == 5) PuzzleGame (); Debug.Log (pg_count);
 	}
 	
 	void Menu() {
@@ -53,12 +56,6 @@ public class SceneManager : MonoBehaviour {
 		cg_limit = 7;
 		cg_square = Resources.Load("Prefabs/Object") as GameObject;
 	}
-	/*
-	void pg_init(){
-		fish = GameObject.Find("Fish");
-		worm = GameObject.Find("Worm");
-		bird = GameObject.Find("Bird");
-	}*/
 	
 	void ColorGame() {
 		if (cg_count >= cg_limit) {
@@ -86,6 +83,22 @@ public class SceneManager : MonoBehaviour {
 	}
 
 	void PuzzleGame() {
+		pg_count++;
+		if (pg_count < 800) {
+			fish.SetActive (false);
+			worm.SetActive (false);
+			bird.SetActive (true);
+		}
+		
+		if (pg_count > 800 && pg_count < 1600) {
+			bird.SetActive(false);
+			worm.SetActive(true);
+		}
+		
+		if (pg_count > 1600) {
+			worm.SetActive(false);
+			fish.SetActive(true);
+		}
 	}
 
 
@@ -99,3 +112,23 @@ public class SceneManager : MonoBehaviour {
 		Application.LoadLevel (level);
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
