@@ -10,9 +10,10 @@ public class Draggable : MonoBehaviour {
     private bool isTouching;
     private bool canDie;
 
-	void Start()
-	{
-        isTouching = false;
+	public bool snapped;
+
+	void Start() {
+		isTouching = snapped = false;
         canDie = true;
 		t = this.transform;
 		mainCam = Camera.main;
@@ -22,31 +23,27 @@ public class Draggable : MonoBehaviour {
         isTouching = Input.GetMouseButton(0);
     }
 
-	void OnMouseDown()
-	{
+	void OnMouseDown() {
 		Vector2 mousePos = Input.mousePosition;
 		float distance = mainCam.WorldToScreenPoint(t.position).z;
 		Vector3 worldPos = mainCam.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, distance));
 		offset = t.position - worldPos;
 	}
 
-	void OnMouseDrag()
-	{
+	void OnMouseDrag() {
 		Vector2 mousePos = Input.mousePosition;
 		float distance = mainCam.WorldToScreenPoint(t.position).z;
 		t.position = mainCam.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, distance)) + offset;
 	}
 
-    void OnTriggerEnter2D(Collider2D col)
-    {
+    void OnTriggerEnter2D(Collider2D col) {
         if (this.gameObject.tag == col.tag && !isTouching) {
             StartCoroutine(DieAnim());
             //Destroy(this.gameObject);
         }
     }
 
-    void OnTriggerStay2D(Collider2D col)
-    {
+    void OnTriggerStay2D(Collider2D col) {
         if (this.gameObject.tag == col.tag && !isTouching) {
             StartCoroutine(DieAnim());
             //Destroy(this.gameObject);
@@ -55,7 +52,7 @@ public class Draggable : MonoBehaviour {
 
     IEnumerator DieAnim() {
 		if (Application.loadedLevel != 5) {
-			if (canDie) transform.DOBlendableScaleBy (new Vector3 (-2.5f, -2.5f, -2.5f), 0.5f);
+			if (canDie) transform.DOBlendableScaleBy (new Vector3 (-1f, -1f, -1f), 0.5f);
 			canDie = false;
 			yield return new WaitForSeconds (0.5f);
 			Destroy (this.gameObject);

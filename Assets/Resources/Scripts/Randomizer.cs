@@ -4,21 +4,50 @@ using System.Collections;
 
 public class Randomizer : MonoBehaviour {
 
-	public Sprite[] spriteList;
+	public Sprite[] spriteList = new Sprite[5];
+	private int wg_count;
+	private int wg_limit;
+	
+	GameObject[] letterGameObjects = new GameObject[4];
+	GameObject[] newLetters = new GameObject[4];
+	
+	float[] positionsX = new float[4] {
+		-257, -77, 110, 285
+	};
+	float positionY = -230f;
 
 	string[] names = new string[5] {
-        "d u c k",
-        "f i s h",
-        "b i r d",
-        "l i o n",
-        "w o r m"
+        "p a t o",
+		"l e a o",
+		"g a t o",
+		"s a p o",
+		"f o c a"
 	};
 
-	GameObject letter;
-
 	void Start () {
+		wg_count = 0;
+		wg_limit = 7;
+		spriteList = Resources.LoadAll<Sprite> ("Sprites/wg-sprites");
+		for (int i = 0, l = letterGameObjects.Length; i < l; i++) {
+			letterGameObjects[i] = GameObject.FindGameObjectWithTag("Letter" + (i+1));
+		}
 		PickWord ();
-		spriteList = Resources.LoadAll<Sprite> ("Sprites");
+	}
+	
+	void Update () {
+		if (wg_count >= wg_limit) {
+			Application.LoadLevel (1);
+		} else if (newLetters [0].transform.position.x < newLetters [1].transform.position.x
+		 && newLetters [1].transform.position.x < newLetters [2].transform.position.x
+		 && newLetters [2].transform.position.x < newLetters [3].transform.position.x
+		 && newLetters [0].GetComponent<Draggable> ().snapped
+		 && newLetters [1].GetComponent<Draggable> ().snapped
+		 && newLetters [2].GetComponent<Draggable> ().snapped
+		 && newLetters [3].GetComponent<Draggable> ().snapped
+	     && !Input.GetMouseButton(0) && !Input.GetMouseButtonDown(0)) {
+			resetPositions();
+			PickWord();
+		}
 	}
 
 	Sprite findSpriteByname (string name) {
@@ -33,17 +62,29 @@ public class Randomizer : MonoBehaviour {
 	void PickWord () {
 		int ran = (int)Random.Range (0f, names.Length);
 		string pick = names [ran];
+
 		if (pick != null) {
-			SpriteRenderer sr = GameObject.FindGameObjectWithTag("Image").GetComponent<SpriteRenderer>();
-			sr.sprite = (Sprite)findSpriteByname(pick);
+			GameObject img = GameObject.FindGameObjectWithTag("Image");
+			string pickJoined = string.Join("", pick.Split (' '));
+			Sprite spr = findSpriteByname(pickJoined);
+			img.GetComponent<SpriteRenderer>().sprite = spr;
+			if (spr == null) Debug.LogError("Oh damn!");
 
 			string[] n = (Shuffle (pick.Split(' ')));
 			for (int i = 0, l = n.Length; i < l; i++) {
-				letter = GameObject.FindGameObjectWithTag("Letter" + (i+1));
+				GameObject letter = letterGameObjects[i];
 				if (letter) {
 					letter.GetComponent<Text>().text = n[i].ToUpper();
+					int pos = -1;
+					for (int j = 0, k = pickJoined.Length; j < k; j++) {
+						if (pickJoined[j].ToString() == n[i]) {
+							pos = j;
+						}
+					}
+					newLetters[pos] = letter;
+					letter.name = (pos).ToString();
 				} else {
-					Debug.Log ("Woops. We're sorry for the inconvenience!");
+					Debug.LogError ("Woops. We're sorry for the inconvenience!");
 				}
 			}
 		}
@@ -57,5 +98,11 @@ public class Randomizer : MonoBehaviour {
 			texts[r] = tmp;
 		}
 		return texts;
+	}
+
+	void resetPositions () {
+		for (int i = 0, l = letterGameObjects.Length; i < l; i++) {
+			letterGameObjects[i].transform.localPosition = new Vector2(positionsX[i], positionY);
+		}
 	}
 }
