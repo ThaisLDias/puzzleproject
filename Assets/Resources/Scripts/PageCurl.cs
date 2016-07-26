@@ -25,6 +25,7 @@ public class PageCurl : MonoBehaviour
 	protected float theta = 0.0f;
 	public float timeStep = 0.01f;
 	public Vector3[] v0;
+	public GameObject sceneManager;
 	
 	public void calcAuto(float t)
 	{
@@ -149,9 +150,19 @@ public class PageCurl : MonoBehaviour
 	
 	public void LateUpdate()
 	{
+		if (sceneManager.GetComponent<SceneManager> ().allowToTurn) {
+			this.RAD = ((float) 360) / PI2;
+			this.theta = 15f / RAD;
+			this.apex.z += 2f * Time.deltaTime;
+			this.RAD -= 2f * Time.deltaTime;
+			this.theta -= 2f * Time.deltaTime;
+
+		}
+
 		if (!_initialized)
 		{
 			initialize();
+			this.theta = 90;
 		}
 		else
 		{
@@ -169,15 +180,26 @@ public class PageCurl : MonoBehaviour
 			}
 		}
 	}
+
+	public void turnPage() {
+		this.theta = 15;
+		if( this.apex.z < -1.8738f) this.apex.z += 0.4f * Time.deltaTime;
+		if (this.RAD > 55.172f) this.RAD -= 0.4f * Time.deltaTime;
+		if (this.theta > 0.025f) this.theta -= 0.3f * Time.deltaTime;
+		this.transform.position = new Vector3 (this.transform.position.x - 0.4f * Time.deltaTime,
+		                                       this.transform.position.y,
+		                                       this.transform.position.z);
+	}
 	
 	public void Main()
 	{
 	}
 	
-	public void OnGUI()
+	/*public void OnGUI()
 	{
 		if (this._initialized)
 		{
+			style.normal.textColor = Color.black;
 			GUI.BeginGroup(new Rect((float) 0x19, (float) 0x19, (float) (Screen.width - 50), (float) 80));
             this.deltaT = GUI.HorizontalSlider(new Rect((float) 100, (float) 5, (float) 300, (float) 30), this.deltaT, 1f, (float) 0);
             GUI.Label(new Rect((float) 0, (float) 0, (float) 100, (float) 20), "t = " + deltaT.ToString());
@@ -192,25 +214,25 @@ public class PageCurl : MonoBehaviour
                 this.animT = false;
             }
             this.kT = GUI.HorizontalSlider(new Rect((float) 100, (float) 30, (float) 300, (float) 30), this.kT, 0.1f, 10f);
-            GUI.Label(new Rect((float) 0, (float) 0x19, (float) 100, (float) 20), "k = " + kT.ToString());
-            GUI.Label(new Rect((float) 420, (float) 0x19, (float) 200, (float) 20), "time scale (flips per second)");
-            GUI.Label(new Rect((float) 0, (float) 50, (float) 100, (float) 20), "fps = " + (1f / Time.deltaTime).ToString());
+            GUI.Label(new Rect((float) 0, (float) 0x19, (float) 100, (float) 20), "k = " + kT.ToString(), style);
+			GUI.Label(new Rect((float) 420, (float) 0x19, (float) 200, (float) 20), "time scale (flips per second)", style);
+			GUI.Label(new Rect((float) 0, (float) 50, (float) 100, (float) 20), "fps = " + (1f / Time.deltaTime).ToString(), style);
             GUI.EndGroup();
-            GUI.BeginGroup(new Rect((float) 0x19, (float) ((Screen.height / 2) - 200), (float) 120, (float) 400));
-            this.apex.z = GUI.VerticalSlider(new Rect((float) 0, (float) 0, (float) 30, (float) 340), this.apex.z, (float) 0, (float) (-20));
-            GUI.Label(new Rect((float) 0, (float) 350, (float) 100, (float) 20), "A = " + apex.z.ToString());
-            GUI.Label(new Rect((float) 0, (float) 370, (float) 100, (float) 20), "cone apex");
+			GUI.BeginGroup(new Rect((float) 0x19, (float) ((Screen.height / 2) - 200), (float) 120, (float) 400));
+			this.apex.z = GUI.VerticalSlider(new Rect((float) 0, (float) 0, (float) 30, (float) 340), this.apex.z, (float) 0, (float) (-20));
+			GUI.Label(new Rect((float) 0, (float) 350, (float) 100, (float) 20), "A = " + apex.z.ToString(), style);
+			GUI.Label(new Rect((float) 0, (float) 370, (float) 100, (float) 20), "cone apex", style);
             GUI.EndGroup();
             GUI.BeginGroup(new Rect((float) 0x19, (float) (Screen.height - 120), (float) (Screen.width - 50), (float) 100));
             this.theta = GUI.HorizontalSlider(new Rect((float) 120, (float) 5, (float) 280, (float) 30), this.theta, ((float) 1) / this.RAD, ((float) 90) / this.RAD);
-            GUI.Label(new Rect((float) 0, (float) 0, (float) 180, (float) 20), "theta = \t" + (this.theta * this.RAD).ToString());
-            GUI.Label(new Rect((float) 420, (float) 0, (float) 200, (float) 20), "cone angle");
+			GUI.Label(new Rect((float) 0, (float) 0, (float) 180, (float) 20), "theta = \t" + (this.theta * this.RAD).ToString(), style);
+			GUI.Label(new Rect((float) 420, (float) 0, (float) 200, (float) 20), "cone angle", style);
             this.rho = GUI.HorizontalSlider(new Rect((float) 120, (float) 30, (float) 280, (float) 30), this.rho, (float) 180, (float) 0);
-            GUI.Label(new Rect((float) 0, (float) 0x19, (float) 180, (float) 20), "rho = \t\t" + rho.ToString());
-            GUI.Label(new Rect((float) 420, (float) 0x19, (float) 200, (float) 20), "page rotation");
+			GUI.Label(new Rect((float) 0, (float) 0x19, (float) 180, (float) 20), "rho = \t\t" + rho.ToString(), style);
+			GUI.Label(new Rect((float) 420, (float) 0x19, (float) 200, (float) 20), "page rotation", style);
             GUI.EndGroup();
 		}
-	}
+	}*/
 	
 	public void renderMesh()
 	{

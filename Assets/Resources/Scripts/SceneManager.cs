@@ -8,7 +8,7 @@ public class SceneManager : MonoBehaviour {
 	[SerializeField]
 	private GameObject plane;
 	private Texture snapshot;
-	private int can = 1;
+	public bool allowToTurn = false;
 
 	// Color Game Variables
 	private int cg_count;
@@ -37,10 +37,6 @@ public class SceneManager : MonoBehaviour {
 	}
 	
 	void Menu() {
-		if (can <3) {
-			StartCoroutine (TakeSnapshot (Screen.width, Screen.height));
-			can++;
-		}
 	}
 
 	void Lobby() {
@@ -101,6 +97,7 @@ public class SceneManager : MonoBehaviour {
 
 	public void ChangeScene (int level) {
 		Application.LoadLevel (level);
+		StartCoroutine (TakeSnapshot (Screen.width, Screen.height));
 	}
 	
 	public void ChangeScene (string level) {
@@ -115,7 +112,8 @@ public class SceneManager : MonoBehaviour {
 		snapshot = texture;
 		plane.SetActive (true);
 		plane.GetComponent<Renderer>().material.mainTexture = snapshot;
-		plane.transform.localScale = new Vector3(19.5f, 1, 10);
+		plane.transform.localScale = new Vector3(21.5f, 1, 10);
+		allowToTurn = true;
 	}
 
 }
