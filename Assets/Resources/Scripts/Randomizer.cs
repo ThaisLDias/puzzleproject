@@ -46,7 +46,6 @@ public class Randomizer : MonoBehaviour {
 		 && newLetters [3].GetComponent<Draggable> ().snapped
 	     && !Input.GetMouseButton(0) && !Input.GetMouseButtonDown(0)) {
 			resetPositions();
-			wg_count++;
 			PickWord();
 		}
 	}

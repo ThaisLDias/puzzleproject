@@ -17,6 +17,12 @@ public class SceneManager : MonoBehaviour {
 	private GameObject cg_square;
 	private Sprite[] cg_sprites;
 
+	//Puzzle Game Variables
+	private GameObject worm;
+	private GameObject fish;
+	private GameObject bird;
+	public static int pg_count;
+	
 	void Start () {
 		currentScene = Application.loadedLevel;
 		if (currentScene == 0) {} // "Menu"
@@ -24,7 +30,11 @@ public class SceneManager : MonoBehaviour {
 		if (currentScene == 2) {} // "Credits"
 		if (currentScene == 3) cg_init (); // "Color Game"
 		if (currentScene == 4) {} // "Word Game"
-		if (currentScene == 5) {} // "Puzzle Game"
+		if (currentScene == 5) {
+			fish = GameObject.Find("Fish");
+			worm = GameObject.Find("Worm");
+			bird = GameObject.Find("Bird");
+		} // "Puzzle Game"
 	}
 	
 	void Update() {
@@ -90,10 +100,26 @@ public class SceneManager : MonoBehaviour {
 	}
 
 	void WordGame() {
-		
+
 	}
 
 	void PuzzleGame() {
+		pg_count++;
+		if (pg_count < 800) {
+			fish.SetActive (false);
+			worm.SetActive (false);
+			bird.SetActive (true);
+		}
+		
+		if (pg_count > 800 && pg_count < 1600) {
+			bird.SetActive(false);
+			worm.SetActive(true);
+		}
+		
+		if (pg_count > 1600) {
+			worm.SetActive(false);
+			fish.SetActive(true);
+		}
 	}
 
 
@@ -119,3 +145,23 @@ public class SceneManager : MonoBehaviour {
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,12 +1,9 @@
 fileFormatVersion: 2
 guid: de66ef8d125cf6c4d9d23b12d2999a10
-timeCreated: 1469539136
+timeCreated: 1466521296
 licenseType: Pro
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: duck_0
-    21300002: duck_1
-    21300004: duck_2
+  fileIDToRecycleName: {}
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -33,7 +30,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     filterMode: -1
-    aniso: 16
+    aniso: -1
     mipBias: -1
     wrapMode: 1
   nPOTScale: 0
@@ -51,37 +48,7 @@ TextureImporter:
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites:
-    - name: duck_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 259
-        width: 444
-        height: 136
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: duck_1
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 131
-        width: 444
-        height: 128
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: duck_2
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 444
-        height: 131
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+    sprites: []
   spritePackingTag: 
   userData: 
   assetBundleName: 
