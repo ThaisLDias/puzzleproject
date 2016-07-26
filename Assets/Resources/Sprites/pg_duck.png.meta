@@ -1,12 +1,12 @@
 fileFormatVersion: 2
-guid: fd5a1276d8dda944ead41b86f86fa70a
-timeCreated: 1469539060
+guid: 53e87e9c0b9543445ab66460eea102a2
+timeCreated: 1469539269
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
-    21300000: gato_0
-    21300002: gato_1
-    21300004: gato_2
+    21300000: pg_duck_0
+    21300002: pg_duck_1
+    21300004: pg_duck_2
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -40,7 +40,7 @@ TextureImporter:
   lightmap: 0
   rGBM: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -52,33 +52,33 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: gato_0
+    - name: pg_duck_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 265
-        width: 325
-        height: 131
+        y: 254
+        width: 444
+        height: 141
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: gato_1
+    - name: pg_duck_1
       rect:
         serializedVersion: 2
         x: 0
-        y: 135
-        width: 325
-        height: 130
+        y: 131
+        width: 444
+        height: 123
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: gato_2
+    - name: pg_duck_2
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 325
-        height: 135
+        width: 444
+        height: 131
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
