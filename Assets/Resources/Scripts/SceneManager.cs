@@ -6,9 +6,9 @@ public class SceneManager : MonoBehaviour {
 	private int currentScene;
 
 	[SerializeField]
-	private GameObject plane;
+	/*private GameObject plane;
 	private Texture snapshot;
-	public bool allowToTurn = false;
+	public bool allowToTurn = false;*/
 
 	// Color Game Variables
 	private int cg_count;
@@ -90,30 +90,16 @@ public class SceneManager : MonoBehaviour {
 	}
 
 	void PuzzleGame() {
+
 	}
 
-
-// Utils
+	// Utils
 
 	public void ChangeScene (int level) {
 		Application.LoadLevel (level);
-		StartCoroutine (TakeSnapshot (Screen.width, Screen.height));
 	}
-	
+
 	public void ChangeScene (string level) {
 		Application.LoadLevel (level);
 	}
-
-	public IEnumerator TakeSnapshot(int width, int height) {
-		yield return new WaitForEndOfFrame();
-		Texture2D texture = new Texture2D (width, height, TextureFormat.RGB24, true);
-		texture.ReadPixels(new Rect(0, 0, width, height), 0, 0);
-		texture.Apply();
-		snapshot = texture;
-		plane.SetActive (true);
-		plane.GetComponent<Renderer>().material.mainTexture = snapshot;
-		plane.transform.localScale = new Vector3(21.5f, 1, 10);
-		allowToTurn = true;
-	}
-
 }
