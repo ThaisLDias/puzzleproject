@@ -26,7 +26,7 @@ public class Randomizer : MonoBehaviour {
 
 	void Start () {
 		wg_count = 0;
-		wg_limit = 7;
+		wg_limit = 5;
 		spriteList = Resources.LoadAll<Sprite> ("Sprites/wg-sprites");
 		for (int i = 0, l = letterGameObjects.Length; i < l; i++) {
 			letterGameObjects[i] = GameObject.FindGameObjectWithTag("Letter" + (i+1));
