@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
+
 public class Music : MonoBehaviour {
 
 
@@ -8,13 +10,20 @@ public class Music : MonoBehaviour {
 	public AudioSource audioSource;
 	public static bool soundOn = true;
 
+
+
+	private Sprite on;
+	private Sprite off;
+
 	void Awake() 
 	{
-		if (instance == null) {
-			DontDestroyOnLoad (this.gameObject);
-			instance = this;
-		} else
+		if (instance != null && instance != this) {
 			Destroy (this.gameObject);
+			return;
+		} else {
+			instance = this;
+		}
+		DontDestroyOnLoad(this.gameObject);
 	
 	} 
 
@@ -23,13 +32,16 @@ public class Music : MonoBehaviour {
 
 		audioSource = GetComponent<AudioSource> ();
 		audioSource.Play ();
+
+
+
 	
 	}
 
 	public static void PlayMusic()
 	{
 		if(instance != null) 
-			instance.audioSource.Play ();
+		instance.audioSource.Play ();
 	}
 
 	public static void StopMusic()
@@ -43,8 +55,10 @@ public class Music : MonoBehaviour {
 		soundOn = !soundOn;
 		if (soundOn)
 			PlayMusic ();
+		
 		else
 			StopMusic ();
+		
 
 	}
 	

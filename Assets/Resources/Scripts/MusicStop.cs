@@ -4,29 +4,28 @@ using UnityEngine.UI;
 
 public class MusicStop : MonoBehaviour {
 
-	public bool isPlaying;
+
 	private Sprite on;
 	private Sprite off;
 
-	void Start() {
-		isPlaying = false;
-		ToggleMusic ();
-
+	void Start(){
+	
 		on = Resources.Load<Sprite>("Sprites/on");
 		off = Resources.Load<Sprite>("Sprites/off");
 	}
 
-	public void ToggleMusic() {
-		if (isPlaying) {
-			Music.StopMusic ();
-			isPlaying = false;
+	public void StopMusic(){
+		Music.ToggleMusic ();
+		
+	}
 
-			GameObject.FindGameObjectWithTag("soundImage").GetComponent<Image>().overrideSprite = off;
-		} else {
-			Music.PlayMusic ();
-			isPlaying = true;
-
+	public void OnMouseDown()
+	{
+		if (Music.soundOn) {
 			GameObject.FindGameObjectWithTag("soundImage").GetComponent<Image>().overrideSprite = on;
+		}
+		else {
+			GameObject.FindGameObjectWithTag("soundImage").GetComponent<Image>().overrideSprite = off;
 		}
 	} 
 }
