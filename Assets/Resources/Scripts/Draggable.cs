@@ -10,7 +10,11 @@ public class Draggable : MonoBehaviour {
     private bool isTouching;
     private bool canDie;
 
+	private int acertos;
+	private int erros;
+
 	public bool snapped;
+	public GameObject sceneManager;
 
 	void Start() {
 		isTouching = snapped = false;
@@ -21,6 +25,7 @@ public class Draggable : MonoBehaviour {
 
     void Update() {
         isTouching = Input.GetMouseButton(0);
+		Debug.Log (PlayerPrefs.GetInt("acertos"));
     }
 
 	void OnMouseDown() {
@@ -37,17 +42,17 @@ public class Draggable : MonoBehaviour {
 	}
 
     void OnTriggerEnter2D(Collider2D col) {
-        if (this.gameObject.tag == col.tag && !isTouching) {
-            StartCoroutine(DieAnim());
-            //Destroy(this.gameObject);
-        }
+        if (this.gameObject.tag == col.tag && isTouching) {
+			PlayerPrefs.SetInt ("acertos", PlayerPrefs.GetInt("acertos") + 1);
+		} else
+			PlayerPrefs.SetInt ("erros", PlayerPrefs.GetInt("erros") + 1);
     }
 
     void OnTriggerStay2D(Collider2D col) {
         if (this.gameObject.tag == col.tag && !isTouching) {
-            StartCoroutine(DieAnim());
-            //Destroy(this.gameObject);
-        }
+			StartCoroutine (DieAnim ());
+			//Destroy(this.gameObject);
+		}
     }
 
     IEnumerator DieAnim() {

@@ -65,6 +65,9 @@ public class SceneManager : MonoBehaviour {
 		cg_square.GetComponent<SpriteRenderer>().sprite = cg_sprites[Mathf.RoundToInt(Random.Range(0, 30) / 10)];
 		if (cg_count >= cg_limit) {
 			cg_init ();
+			GetComponent<PhpConnect>().UpdateHighScore(Application.loadedLevelName, PlayerPrefs.GetInt("acertos"), PlayerPrefs.GetInt("erros"));
+			PlayerPrefs.DeleteKey ("acertos");
+			PlayerPrefs.DeleteKey ("erros");
 			Application.LoadLevel (1);
 		} else {
 			if (GameObject.Find ("Object") == null
@@ -101,5 +104,9 @@ public class SceneManager : MonoBehaviour {
 
 	public void ChangeScene (string level) {
 		Application.LoadLevel (level);
+	}
+
+	public void OpenURL() {
+		Application.OpenURL("http://pupper.esy.es/pupper.php");
 	}
 }
