@@ -25,7 +25,6 @@ public class Draggable : MonoBehaviour {
 
     void Update() {
         isTouching = Input.GetMouseButton(0);
-		Debug.Log (PlayerPrefs.GetInt("acertos"));
     }
 
 	void OnMouseDown() {
@@ -33,12 +32,18 @@ public class Draggable : MonoBehaviour {
 		float distance = mainCam.WorldToScreenPoint(t.position).z;
 		Vector3 worldPos = mainCam.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, distance));
 		offset = t.position - worldPos;
+		//this.gameObject.GetComponent<SpriteRenderer> ().sortingOrder = 2;
 	}
 
 	void OnMouseDrag() {
 		Vector2 mousePos = Input.mousePosition;
 		float distance = mainCam.WorldToScreenPoint(t.position).z;
 		t.position = mainCam.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, distance)) + offset;
+	}
+
+	void OnMouseUp()
+	{
+		//this.gameObject.GetComponent<SpriteRenderer> ().sortingOrder = 1;
 	}
 
     void OnTriggerEnter2D(Collider2D col) {
@@ -51,7 +56,7 @@ public class Draggable : MonoBehaviour {
     void OnTriggerStay2D(Collider2D col) {
         if (this.gameObject.tag == col.tag && !isTouching) {
 			StartCoroutine (DieAnim ());
-			//Destroy(this.gameObject);
+
 		}
     }
 
@@ -61,6 +66,13 @@ public class Draggable : MonoBehaviour {
 			canDie = false;
 			yield return new WaitForSeconds (0.5f);
 			Destroy (this.gameObject);
+
 		}
+		if(Application.loadedLevel == 6) {
+			GameObject.Find("Main Camera").GetComponent<RandomSquad>().eg_Count += 1;
+			Debug.Log(GameObject.Find("Main Camera").GetComponent<RandomSquad>().eg_Count);
+		}
+
+
     }
 }

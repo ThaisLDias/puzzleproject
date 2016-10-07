@@ -25,8 +25,6 @@ public class SceneManager : MonoBehaviour {
 		if (currentScene == 3) cg_init (); // "Color Game"
 		if (currentScene == 4) {} // "Word Game"
 		if (currentScene == 5) {} // "Puzzle Game"
-		if (currentScene == 6) {} // "Emotion Game"
-
 	}
 	
 	void Update() {
@@ -36,8 +34,6 @@ public class SceneManager : MonoBehaviour {
 		if (currentScene == 3) ColorGame ();
 		if (currentScene == 4) WordGame ();
 		if (currentScene == 5) PuzzleGame ();
-		if (currentScene == 6) EmotionGame ();
-
 	}
 	
 	void Menu() {
@@ -99,12 +95,6 @@ public class SceneManager : MonoBehaviour {
 	void PuzzleGame() {
 
 	}
-
-	void EmotionGame(){
-	
-	}
-
-
 
 	// Utils
 

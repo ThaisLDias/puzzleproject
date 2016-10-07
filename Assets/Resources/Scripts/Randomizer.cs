@@ -38,16 +38,24 @@ public class Randomizer : MonoBehaviour {
 		if (wg_count >= wg_limit) {
 			Application.LoadLevel (1);
 		} else if (newLetters [0].transform.position.x < newLetters [1].transform.position.x
-		 && newLetters [1].transform.position.x < newLetters [2].transform.position.x
-		 && newLetters [2].transform.position.x < newLetters [3].transform.position.x
-		 && newLetters [0].GetComponent<Draggable> ().snapped
-		 && newLetters [1].GetComponent<Draggable> ().snapped
-		 && newLetters [2].GetComponent<Draggable> ().snapped
-		 && newLetters [3].GetComponent<Draggable> ().snapped
-	     && !Input.GetMouseButton(0) && !Input.GetMouseButtonDown(0)) {
-			resetPositions();
+		&& newLetters [1].transform.position.x < newLetters [2].transform.position.x
+		&& newLetters [2].transform.position.x < newLetters [3].transform.position.x
+		&& newLetters [0].GetComponent<Draggable> ().snapped
+		&& newLetters [1].GetComponent<Draggable> ().snapped
+		&& newLetters [2].GetComponent<Draggable> ().snapped
+		&& newLetters [3].GetComponent<Draggable> ().snapped
+		&& !Input.GetMouseButton (0) && !Input.GetMouseButtonDown (0)) {
+			resetPositions ();
 			wg_count++;
-			PickWord();
+			PlayerPrefs.SetInt ("acertos", PlayerPrefs.GetInt("acertos") + 1);
+			PickWord ();
+		} else if (newLetters [0].GetComponent<Draggable> ().snapped
+		&& newLetters [1].GetComponent<Draggable> ().snapped
+		&& newLetters [2].GetComponent<Draggable> ().snapped
+		&& newLetters [3].GetComponent<Draggable> ().snapped
+        && !Input.GetMouseButton (0) && !Input.GetMouseButtonDown (0)) {
+			resetPositions ();
+			PlayerPrefs.SetInt ("erros", PlayerPrefs.GetInt("erros") + 1);
 		}
 	}
 
